@@ -28,8 +28,8 @@ INSTALLATION
 CONFIGURATION
 -------------
 * composer dump-autoload
-* php artisan vendor:publish --provider="Paytabscom\Laravel_paytabs\PaypageServiceProvider"
- 
+* php artisan vendor:publish --tag=paytabs
+
 * go to config/app.php and in the providers array please add
 
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,

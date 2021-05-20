@@ -16,6 +16,9 @@ class PaypageServiceProvider extends ServiceProvider
         $this->app->bind('paypage', function($app) {
             return new paypage();
         });
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/config.php', 'paytabs'
+        );
     }
 
     /**
@@ -27,6 +30,6 @@ class PaypageServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('paytabs.php'),
-        ],'config');
+        ],'paytabs');
     }
 }
