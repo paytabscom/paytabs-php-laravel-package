@@ -25,8 +25,9 @@ class PaypageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('paytabs.php'),
-        ],'config');
+        $path = realpath(__DIR__.'/../../config/config.php');
+
+        $this->publishes([$path => config_path('paytabs.php')], 'config');
+        $this->mergeConfigFrom($path, 'paytabs');
     }
 }
