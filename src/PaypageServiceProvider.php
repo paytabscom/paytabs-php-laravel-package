@@ -29,7 +29,7 @@ class PaypageServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path('paytabs.php'),
+            __DIR__ . '/config/config.php' => config_path('paytabs.php'),
         ],'paytabs');
     }
 }
