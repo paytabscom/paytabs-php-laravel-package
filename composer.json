@@ -25,15 +25,5 @@
         "psr-4": {
             "Paytabscom\\Laravel_paytabs\\": "src/"
         }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Paytabscom\\Laravel_paytabs\\PaypageServiceprovider"
-            ],
-            "aliases": {
-                "Paypage": "Paytabscom\\Laravel_paytabs\\Facades\\paypage"
-            }
-        }
     }
 }
