@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Paytabs\Pt2\Facades;
+namespace  Paytabscom\Laravel_paytabs;
 use Illuminate\Support\Facades\Facade;
 
 class paypage extends Facade
