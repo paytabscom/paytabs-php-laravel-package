@@ -1,0 +1,34 @@
+{
+    "name": "paytabscom/laravel_paytabs",
+    "version": "1.0.0",
+    "type": "composer-package",
+    "description": "Official laravel package to implement PayTabs integration with laravel apps",
+    "authors": [
+        {
+            "name": "Walaa Elsaeed",
+            "email": "walaa.elsaeed@elgameya.net"
+        }
+    ],
+    "homepage": "https://site.paytabs.com/en/",
+    "minimum-stability": "dev",
+    "keywords": [
+        "Laravel",
+        "Paytabs",
+        "Payments",
+        "E-comerce"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.0.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Paytabscom\\Laravel_paytabs\\PaypageServiceProvider"
+            ],
+            "aliases": {
+                "Paypage": "Paytabscom\\Laravel_paytabs\\Facades\\Paypage"
+            }
+        }
+    }
+}
