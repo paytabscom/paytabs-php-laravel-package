@@ -52,9 +52,12 @@ Important Hint:
 
 Usage
 -------------
+
 * create pay page
 
-        pay= Paypage::sendPaymentCode('all')
+        use Paytabscom\Laravel_paytabs\Facades\paypage;
+
+        $pay= paypage::sendPaymentCode('all')
                ->sendTransaction('sale')
                 ->sendCart(10,1000,'test')
                ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '01092540925', 'test', 'Nasr City', 'Cairo', 'Egypt', '1234','100.279.20.10')
