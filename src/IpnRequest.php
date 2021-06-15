@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class IpnRequest
 {
     private $request;
+    private $clientKey;
 
 
     public function __construct(Request $httpRequest) {
@@ -22,6 +23,8 @@ class IpnRequest
             //update the cart payment status
             $content= $httpRequest->getContent();
             $this->request= json_decode($content, false, 3);
+            $this->clientKey= $httpRequest->header('client-key');
+
         }else{
             throw new BadRequestException('invalid callback\IPN request');
         }
@@ -49,9 +52,16 @@ class IpnRequest
             return false;
         }
     }
-    
+
     public function getIpnRequestDetails(){
         return $this->request;
+    }
+
+    /**
+     * return client-key header parameter
+     */
+    public function getIpnRequestClientKey(){
+        return $this->clientKey;
     }
 
 }

@@ -29,13 +29,15 @@ CONFIGURATION
 -------------
 * composer dump-autoload
 
-* go to config/app.php and in the providers array please add
+* Go to _config/app.php_ and in the providers array add
 
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
 
-* php artisan vendor:publish --tag=paytabs
+* Create the package config file:
 
-* go to config/logging.php and in the channels array please add
+        php artisan vendor:publish --tag=paytabs
+
+* Go to _config/logging.php_ and in the channels array add
   
       'PayTabs' => [
       'driver' => 'single',
@@ -43,10 +45,10 @@ CONFIGURATION
       'level' => 'info',
       ],
   
-* go to config/paytabs.php and add your merchant info.
+* In _config/paytabs.php_ add your merchant info.
 
-Important Hint:
-  you can pass your merchant info in the environment file with the same key names mentioned in the config/paytabs.php file.
+**Important Hint:**
+  you can pass your merchant info in the environment file with the same key names mentioned in the _config/paytabs.php_ file.
   This value will be returned if no environment variable exists for the given key. 
   
 
@@ -123,5 +125,14 @@ Usage
         $transaction = Paypage::queryTransaction('tran_ref');
         return $transaction;
 
+* if you face any error you will find it logged in: _storage/logs/paytabs.log_
 
-* if you face any error you will find it logged in storage/logs/paytabs.log
+To Receive payment status update
+--------------------------------
+
+PayTabs payment gateway provides means to notify merchant system with payment result once transaction processing was completed so that merchant system can update the transaction respective cart.
+
+1- While creating a pay page, if a URL is passed as the second argument to _sendURLs_ method, that URL will receive an HTTP Post request with the payment result. For more about callback check: **merchant dashboard** > **Developers** > **Transaction API**.
+
+2- Second means is to configure IPN notification from merchant dashboard. For more details about how to configure IPN request and its different formats check: **merchant dashboard** > **Developers** > **Service Types**.
+
