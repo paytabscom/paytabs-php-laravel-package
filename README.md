@@ -127,12 +127,55 @@ Usage
 
 * if you face any error you will find it logged in: _storage/logs/paytabs.log_
 
-To Receive payment status update
+PAYMENT RESULT NOTIFICATION
 --------------------------------
 
-PayTabs payment gateway provides means to notify merchant system with payment result once transaction processing was completed so that merchant system can update the transaction respective cart.
+PayTabs payment gateway provides means to notify your system with payment result once transaction processing was completed so that your system can update the transaction respective cart.
 
-1- While creating a pay page, if a URL is passed as the second argument to _sendURLs_ method, that URL will receive an HTTP Post request with the payment result. For more about callback check: **merchant dashboard** > **Developers** > **Transaction API**.
+To get use of this feature do the following:
 
-2- Second means is to configure IPN notification from merchant dashboard. For more details about how to configure IPN request and its different formats check: **merchant dashboard** > **Developers** > **Service Types**.
+
+1- Defining a route (Optional)
+--------------------------
+Laravel PayTabs PT2 package comes with a default route for incoming IPN requests. The route URI is  _/paymentIPN_ ,  if you don't like it this URI just ignore it and define your own. Look at _src/routes.php_ to get a clue.
+
+
+
+2- Implementing a means to receive notification
+------------------------------------------
+
+To receive notification, do one of the following:
+* While creating a pay page, passed a URL as the second argument to _sendURLs_ method, that URL will receive an HTTP Post request with the payment result. For more about callback check: **merchant dashboard** > **Developers** > **Transaction API**.
+
+* Second means is to configure IPN notification from merchant dashboard. For more details about how to configure IPN request and its different formats check: **merchant dashboard** > **Developers** > **Service Types**.
+
+
+3- Configuring a callback method
+--------------------------------
+Now, you need to configure the plugin with the class\method that will grab the payment details and perform your custom logic (updating cart in DB, notifying the customer ...etc ).
+
+* In your website _config/paytabs.php_ file, add the following:
+
+        'callback' => env('paytabs_ipn_callback', new namespace\your_class() ),
+
+* In your class add new method, it must named: **updateCartByIPN**
+
+        updateCartByIPN( $requestData){
+            $cartId= $requestData->getCartId();
+            $status= $requestData->getStatus();
+            //your logic .. updating cart in DB, notifying the customer ...etc
+        }
+you can also get transaction reference number. To get the list of available prpperties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
+
+
+
+
+
+
+
+
+
+
+
+
 

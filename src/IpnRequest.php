@@ -53,6 +53,9 @@ class IpnRequest
         }
     }
 
+    /**
+     * get all the IPN request info
+    */
     public function getIpnRequestDetails(){
         return $this->request;
     }
@@ -62,6 +65,26 @@ class IpnRequest
      */
     public function getIpnRequestClientKey(){
         return $this->clientKey;
+    }
+
+    public function getCartId() {
+        return $this->request->cart_id;
+    }
+
+    public function getStatus() {
+        return $this->request->payment_result->response_status;
+    }
+
+    public function getCode() {
+        return $this->request->payment_result->response_code;
+    }
+
+    public function getMessage() {
+        return $this->request->payment_result->response_message;
+    }
+
+    public function getTranRef() {
+        return $this->request->tran_ref;
     }
 
 }
