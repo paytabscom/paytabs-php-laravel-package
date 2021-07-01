@@ -165,7 +165,7 @@ Now, you need to configure the plugin with the class\method that will grab the p
             $status= $requestData->getStatus();
             //your logic .. updating cart in DB, notifying the customer ...etc
         }
-you can also get transaction reference number. To get the list of available prpperties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
+you can also get transaction reference number. To get the list of available properties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
 
 
 
