@@ -94,7 +94,13 @@ class IpnRequest
  */
 class BadRequestException extends \Exception{
     
+    protected $message;
+    
     public function __construct($message) {
-        parent::__constuct($message);
+        $this->message= $message;
+    }
+    
+    public function __toString(): string {
+        return $this->message;
     }
 }
