@@ -1,6 +1,6 @@
 <?php
 
-namespace Paytabscom\Laravel_paytabs;
+namespace Paytabscom\Laravel_paytabs\Services;
 
 use Illuminate\Http\Request;
 
@@ -43,9 +43,9 @@ class IpnRequest
     private function isValidIPNRequest($httpRequest){
         $signature= $httpRequest->header('signature');
         $content= $httpRequest->getContent(); //get the request raw content
-        new paytabs_core(); //this is a hack just to be able to use `PaytabsApi` class from paytabs_core.php !!!
+        new \Paytabscom\Laravel_paytabs\paytabs_core(); //this is a hack just to be able to use `PaytabsApi` class from paytabs_core.php !!!
 
-        $paytabs_api= PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
+        $paytabs_api= \Paytabscom\Laravel_paytabs\PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         if($paytabs_api->is_valid_ipn($content, $signature)){
             return true;
         }else{
@@ -53,6 +53,9 @@ class IpnRequest
         }
     }
 
+    /**
+     * get all the IPN request info
+    */
     public function getIpnRequestDetails(){
         return $this->request;
     }
@@ -64,6 +67,26 @@ class IpnRequest
         return $this->clientKey;
     }
 
+    public function getCartId() {
+        return $this->request->cart_id;
+    }
+
+    public function getStatus() {
+        return $this->request->payment_result->response_status;
+    }
+
+    public function getCode() {
+        return $this->request->payment_result->response_code;
+    }
+
+    public function getMessage() {
+        return $this->request->payment_result->response_message;
+    }
+
+    public function getTranRef() {
+        return $this->request->tran_ref;
+    }
+
 }
 
 /**
@@ -71,7 +94,13 @@ class IpnRequest
  */
 class BadRequestException extends \Exception{
     
+    protected $message;
+    
     public function __construct($message) {
-        parent::__constuct($message);
+        $this->message= $message;
+    }
+    
+    public function __toString(): string {
+        return $this->message;
     }
 }
