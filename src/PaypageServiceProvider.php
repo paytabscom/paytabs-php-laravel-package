@@ -20,7 +20,7 @@ class PaypageServiceProvider extends ServiceProvider
             __DIR__ . '/config/config.php', 'paytabs'
         );
 
-        $this->app->make('Paytabscom\Laravel_paytabs\PaytabsLaravelListenerApi');
+        $this->app->make(\Paytabscom\Laravel_paytabs\Controllers\PaytabsLaravelListenerApi::class);
     }
 
     /**
@@ -34,6 +34,6 @@ class PaypageServiceProvider extends ServiceProvider
             __DIR__ . '/config/config.php' => config_path('paytabs.php'),
         ],'paytabs');
 
-        include __DIR__.'/routes.php';
+        include __DIR__.'/../routes/routes.php';
     }
 }

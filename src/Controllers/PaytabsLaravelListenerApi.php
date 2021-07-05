@@ -1,10 +1,10 @@
 <?php
 
-namespace Paytabscom\Laravel_paytabs;
+namespace Paytabscom\Laravel_paytabs\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use Paytabscom\Laravel_paytabs\IpnRequest;
+use Paytabscom\Laravel_paytabs\Services\IpnRequest;
 
 class PaytabsLaravelListenerApi extends BaseController
 {
