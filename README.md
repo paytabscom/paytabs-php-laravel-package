@@ -62,8 +62,8 @@ Usage
         $pay= paypage::sendPaymentCode('all')
                ->sendTransaction('sale')
                 ->sendCart(10,1000,'test')
-               ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '01092540925', 'test', 'Nasr City', 'Cairo', 'Egypt', '1234','100.279.20.10')
-               ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '01092540925', 'test', 'Nasr City', 'Cairo', 'Egypt', '1234','100.279.20.10')
+               ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
+               ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
                ->sendURLs('return_url', 'callback_url')
                ->sendLanguage('en')
                ->create_pay_page();
@@ -95,8 +95,8 @@ Usage
         pay= Paypage::sendPaymentCode('all')
                ->sendTransaction('Auth')
                 ->sendCart(10,1000,'test')
-               ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '01092540925', 'test', 'Nasr City', 'Cairo', 'Egypt', '1234','100.279.20.10')
-               ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '01092540925', 'test', 'Nasr City', 'Cairo', 'Egypt', '1234','100.279.20.10')
+               ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
+               ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
                ->sendURLs('return_url', 'callback_url')
                ->sendLanguage('en')
                ->create_pay_page();
