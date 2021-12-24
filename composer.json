@@ -25,5 +25,12 @@
         "psr-4": {
             "Paytabscom\\Laravel_paytabs\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Paytabscom\\Laravel_paytabs\\PaypageServiceProvider"
+            ]
+        }
     }
 }
