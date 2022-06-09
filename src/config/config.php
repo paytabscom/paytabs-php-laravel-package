@@ -10,19 +10,18 @@
  */
 
 return [
+  /*
+  |--------------------------------------------------------------------------
+  | Merchant profile id
+  |--------------------------------------------------------------------------
+  |
+  | Your merchant profile id , you can find the profile id on your PayTabs Merchant’s Dashboard- profile.
+  |
+  */
 
-    /*
-     |--------------------------------------------------------------------------
-     | Merchant profile id
-     |--------------------------------------------------------------------------
-     |
-     | Your merchant profile id , you can find the profile id on your PayTabs Merchant’s Dashboard- profile.
-     |
-     */
+  'profile_id' => env('paytabs_profile_id', null),
 
-    'profile_id' => env('paytabs_profile_id', null),
-
-    /*
+  /*
    |--------------------------------------------------------------------------
    | Server Key
    |--------------------------------------------------------------------------
@@ -31,9 +30,9 @@ return [
    |
    */
 
-    'server_key' => env('paytabs_server_key', null),
+  'server_key' => env('paytabs_server_key', null),
 
-    /*
+  /*
    |--------------------------------------------------------------------------
    | Currency
    |--------------------------------------------------------------------------
@@ -43,10 +42,10 @@ return [
    |
    */
 
-    'currency' => env('paytabs_currency', null),
+  'currency' => env('paytabs_currency', null),
 
 
-    /*
+  /*
    |--------------------------------------------------------------------------
    | Region
    |--------------------------------------------------------------------------
@@ -56,6 +55,18 @@ return [
    |
    */
 
-    'region' => env('paytabs_region', null),
+  'region' => env('paytabs_region', null),
+
+  /*
+   |--------------------------------------------------------------------------
+   | Currency
+   |--------------------------------------------------------------------------
+   |
+   | The currency you registered in with PayTabs account
+     you must pass value from this array ['AED','EGP','SAR','OMR','JOD','US']
+   |
+   */
+
+  'log_file' => storage_path('logs/paytabs.log'),
 
 ];

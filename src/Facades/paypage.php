@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Paytabscom\Laravel_paytabs\Facades;
+namespace Paytabscom\LaravelPaytabs\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
 
-class paypage extends Facade
+class Paypage extends Facade
 {
     protected static function getFacadeAccessor()
     {

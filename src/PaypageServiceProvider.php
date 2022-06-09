@@ -1,8 +1,9 @@
 <?php
 
-namespace Paytabscom\Laravel_paytabs;
+namespace Paytabscom\LaravelPaytabs;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class PaypageServiceProvider extends ServiceProvider
 {
@@ -13,14 +14,18 @@ class PaypageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('paypage', function($app) {
-            return new paypage();
+        if (! app()->configurationIsCached()) {
+            $this->mergeConfigFrom(
+                __DIR__ . '/config/config.php', 'paytabs'
+            );
+        }
+        
+        $this->app->bind('Paypage', function($app) {
+            return new Paypage();
         });
-        $this->mergeConfigFrom(
-            __DIR__ . '/config/config.php', 'paytabs'
-        );
 
-        $this->app->make(\Paytabscom\Laravel_paytabs\Controllers\PaytabsLaravelListenerApi::class);
+        
+        $this->app->make(\Paytabscom\LaravelPaytabs\Controllers\PaytabsLaravelListenerApi::class);
     }
 
     /**
@@ -30,10 +35,37 @@ class PaypageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/config/config.php' => config_path('paytabs.php'),
-        ],'paytabs');
+        if (app()->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/config/config.php' => config_path('paytabs.php'),
+            ],'paytabs');
+        }
 
-        include __DIR__.'/../routes/routes.php';
+        $this->defineRoutes();
+
+        $this->app->make('config')->set('logging.channels.paytabs', [
+            'driver' => 'single',
+            'path' => config('paytabs.log_file'),
+            'level' => 'debug',
+        ]);
     }
+
+    /**
+     * Define the Paytabs routes.
+     *
+     * @return void
+     */
+    protected function defineRoutes()
+    {
+        if (app()->routesAreCached()) {
+            return;
+        }
+
+        // Since we are going to define only one route we can skip this and simply add it 
+        // $this->loadRoutesFrom(__DIR__.'/../routes/routes.php');
+
+        Route::post('/paymentIPN', [\Paytabscom\LaravelPaytabs\Controllers\PaytabsLaravelListenerApi::class, 'paymentIPN'])->name('payment_ipn');
+        
+    }
+
 }

@@ -1,27 +1,28 @@
 <?php
 
 
-namespace Paytabscom\Laravel_paytabs;
+namespace Paytabscom\LaravelPaytabs;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Log;
+use Paytabscom\LaravelPaytabs\Core\PaytabsApi;
+use Paytabscom\LaravelPaytabs\Core\PaytabsEnum;
+use Paytabscom\LaravelPaytabs\Core\PaytabsFollowupHolder;
+use Paytabscom\LaravelPaytabs\Core\PaytabsHelper;
+use Paytabscom\LaravelPaytabs\Core\PaytabsRequestHolder;
 
-
-class paypage
+class Paypage
 {
 
-    public  $paytabsinit,
-        $paytabs_core,
+    public  $paytabs_core,
         $paytabs_api,
         $follow_transaction,
         $laravel_version,
         $package_version;
     function __construct()
     {
-        $this->paytabsinit = new paytabs_core();
         $this->paytabs_core = new PaytabsRequestHolder();
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
-        $this->laravel_version = app()::VERSION;
+        $this->laravel_version = app()->version();
         $this->package_version = '1.0.0';
     }
 
@@ -94,7 +95,7 @@ class paypage
             return Redirect::to($redirect_url);
         }
         else {
-            Log::channel('PayTabs')->info(json_encode($response));
+            PaytabsHelper::log(json_encode($result));
             print_r(json_encode($response));
         }
     }
@@ -123,7 +124,7 @@ class paypage
             }
             return response()->json(['status' => $status], 200);
         } else if ($pending_success) {
-            Log::channel('PayTabs')->info(json_encode($result));
+            PaytabsHelper::log(json_encode($result));
             print_r('some thing went wrong with integration' . $message);
         }
 
@@ -152,7 +153,7 @@ class paypage
             }
             return response()->json(['status' => $status], 200);
         } else if ($pending_success) {
-            Log::channel('PayTabs')->info(json_encode($result));
+            PaytabsHelper::log(json_encode($result));
             print_r('some thing went wrong with integration' . $message);
         }
     }
@@ -180,7 +181,7 @@ class paypage
             }
             return response()->json(['status' => $status], 200);
         } else if ($pending_success) {
-            Log::channel('PayTabs')->info(json_encode($result));
+            PaytabsHelper::log(json_encode($result));
             print_r('some thing went wrong with integration' . $message);
         }
     }

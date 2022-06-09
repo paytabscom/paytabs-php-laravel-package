@@ -23,7 +23,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Paytabscom\\Laravel_paytabs\\": "src/"
+            "Paytabscom\\LaravelPaytabs\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Paytabscom\\LaravelPaytabs\\PaypageServiceProvider"
+            ],
+            "aliases": {
+                "Paypage": "Paytabscom\\LaravelPaytabs\\Facades\\Paypage"
+            }
         }
     }
 }
