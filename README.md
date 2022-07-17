@@ -81,6 +81,9 @@ Usage
   
         ->sendFramed(true);
 
+* if you want to pass the payment methods you can use
+
+        ::sendPaymentCode("['creditcard','fawry']")
 
 * refund (you can use this function to both refund and partially refund)
 
