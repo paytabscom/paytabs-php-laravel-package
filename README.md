@@ -137,7 +137,7 @@ To get use of this feature do the following:
 
 1- Defining a route (Optional)
 --------------------------
-Laravel PayTabs PT2 package comes with a default route for incoming IPN requests. The route URI is  _/paymentIPN_ ,  if you don't like it this URI just ignore it and define your own. Look at _src/routes.php_ to get a clue.
+Laravel PayTabs PT2 package comes with a default route for incoming IPN requests. The route URI is  _/paymentIPN_ ,  if you don't like it this URI just ignore it and define your own. Look at _routes/routes.php_ to get a clue.
 
 
 
@@ -145,7 +145,7 @@ Laravel PayTabs PT2 package comes with a default route for incoming IPN requests
 ------------------------------------------
 
 To receive notification, do one of the following:
-* While creating a pay page, passed a URL as the second argument to _sendURLs_ method, that URL will receive an HTTP Post request with the payment result. For more about callback check: **merchant dashboard** > **Developers** > **Transaction API**.
+* While creating a pay page, passed this route as  a Callback URL to _sendURLs_ method, that URL will receive an HTTP Post request with the payment result. For more about callback check: **merchant dashboard** > **Developers** > **Transaction API**.
 
 * Second means is to configure IPN notification from merchant dashboard. For more details about how to configure IPN request and its different formats check: **merchant dashboard** > **Developers** > **Service Types**.
 
@@ -166,6 +166,7 @@ Now, you need to configure the plugin with the class\method that will grab the p
             //your logic .. updating cart in DB, notifying the customer ...etc
         }
 you can also get transaction reference number. To get the list of available properties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
+
 
 
 
