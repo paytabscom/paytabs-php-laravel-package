@@ -85,6 +85,13 @@ Usage
 
         ::sendPaymentCode("['creditcard','fawry']")
 
+* if you want to pass the tokenisation option you can use
+        ->sendTokinse(true)
+
+* if you want to make a payment via token you can use
+        ->sendTransaction('transaction_type','recurring')
+        ->sendToken('token returned from the first payment page created with tokenisation option','transRef returned to you in the same first payment page')
+
 * refund (you can use this function to both refund and partially refund)
 
         $refund = Paypage::refund('tran_ref','order_id','amount','refund_reason');
@@ -169,7 +176,6 @@ Now, you need to configure the plugin with the class\method that will grab the p
             //your logic .. updating cart in DB, notifying the customer ...etc
         }
 you can also get transaction reference number. To get the list of available properties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
-
 
 
 
