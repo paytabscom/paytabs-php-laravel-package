@@ -19,6 +19,7 @@ class paypage
     {
         $this->paytabsinit = new paytabs_core();
         $this->paytabs_core = new PaytabsRequestHolder();
+        $this->paytabs_core_token = new PaytabsTokenHolder();
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
@@ -87,7 +88,7 @@ class paypage
 
     public function sendToken($token, $tran_ref)
     {
-        $this->paytabs_core->set20Token($token, $tran_ref);
+        $this->paytabs_core_token->set20Token($token, $tran_ref);
         return $this; 
     }
 
