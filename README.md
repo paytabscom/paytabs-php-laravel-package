@@ -85,12 +85,12 @@ Usage
 
         ::sendPaymentCode("['creditcard','fawry']")
 
-* if you want to pass the tokenisation option you can use
+* if you want to pass the Tokenization option you can use
         ->sendTokinse(true)
 
 * if you want to make a payment via token you can use
         ->sendTransaction('transaction_type','recurring')
-        ->sendToken('token returned from the first payment page created with tokenisation option','transRef returned to you in the same first payment page')
+        ->sendToken('token returned from the first payment page created with Tokenization option','transRef returned to you in the same first payment page')
 
 * refund (you can use this function to both refund and partially refund)
 
