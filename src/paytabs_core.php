@@ -223,6 +223,11 @@ class PaytabsHolder
      */
     private $plugin_info;
 
+    /**
+     * custom values passed from the merchant
+     */
+    private $user_defined;
+
 
     //
 
@@ -235,7 +240,8 @@ class PaytabsHolder
         $all = array_merge(
             $this->transaction,
             $this->cart,
-            $this->plugin_info
+            $this->plugin_info,
+            $this->user_defined
         );
 
         return $all;
@@ -283,7 +289,15 @@ class PaytabsHolder
                 'plugin_version' => "{$plugin_version}",
             ]
         ];
+        return $this;
+    }
 
+    public function set100userDefined($user_defined)
+    {
+        
+        $this->user_defined = [
+            'user_defined' => $user_defined
+        ];
         return $this;
     }
 }
