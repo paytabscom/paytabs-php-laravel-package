@@ -223,11 +223,6 @@ class PaytabsHolder
      */
     private $plugin_info;
 
-    /**
-     * custom values passed from the merchant
-     */
-    private $user_defined;
-
 
     //
 
@@ -240,8 +235,7 @@ class PaytabsHolder
         $all = array_merge(
             $this->transaction,
             $this->cart,
-            $this->plugin_info,
-            $this->user_defined
+            $this->plugin_info
         );
 
         return $all;
@@ -288,15 +282,6 @@ class PaytabsHolder
                 'cart_version' => "{$platform_version}",
                 'plugin_version' => "{$plugin_version}",
             ]
-        ];
-        return $this;
-    }
-
-    public function set100userDefined($user_defined)
-    {
-        
-        $this->user_defined = [
-            'user_defined' => $user_defined
         ];
         return $this;
     }
@@ -376,6 +361,12 @@ class PaytabsRequestHolder extends PaytabsHolder
     private $tokenise;
 
 
+    /**
+     * custom values passed from the merchant
+     */
+    private $user_defined;
+
+
     //
 
     /**
@@ -394,7 +385,8 @@ class PaytabsRequestHolder extends PaytabsHolder
             $this->hide_shipping,
             $this->lang,
             $this->framed,
-            $this->tokenise
+            $this->tokenise,
+            $this->user_defined
         );
 
         return $all;
@@ -528,6 +520,15 @@ class PaytabsRequestHolder extends PaytabsHolder
             ];
         }
 
+        return $this;
+    }
+
+    public function set100userDefined($user_defined = [])
+    {
+        
+        $this->user_defined = [
+            'user_defined' => $user_defined
+        ];
         return $this;
     }
 }
@@ -949,3 +950,4 @@ class PaytabsApi
         return $result;
     }
 }
+

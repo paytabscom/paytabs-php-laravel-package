@@ -23,7 +23,7 @@ class paypage
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
-        $this->package_version = '1.3.0';
+        $this->package_version = '1.3.1';
     }
 
     public function sendPaymentCode($code)
@@ -92,7 +92,7 @@ class paypage
         return $this; 
     }
 
-    public function sendUserDefined(array $user_defined)
+    public function sendUserDefined(array $user_defined = [])
     {
         $this->paytabs_core->set100userDefined($user_defined);
         return $this; 
@@ -100,7 +100,7 @@ class paypage
 
     public function create_pay_page()
     {
-        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.3.0');
+        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.3.1');
         $pp_params = $this->paytabs_core->pt_build();
         $response = $this->paytabs_api->create_pay_page($pp_params);
 
