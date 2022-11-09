@@ -71,7 +71,9 @@ Usage
   
 * if you want to pass the shipping address as same as billing address you can use
         
-        ->sendShippingDetails('same as billing')
+        >shipping_same_billing()
+        and make sure to remove calling 
+        ->sendShippingDetails.
 
 * if you want to hide the shipping address you can use 
   

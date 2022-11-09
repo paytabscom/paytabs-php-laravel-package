@@ -23,7 +23,7 @@ class paypage
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
-        $this->package_version = '1.3.3';
+        $this->package_version = '1.4.0';
     }
 
     public function sendPaymentCode($code)
@@ -49,10 +49,16 @@ class paypage
         $this->paytabs_core->set04CustomerDetails($name, $email, $phone, $address, $city, $state, $country, $zip, $ip);
         return $this;
     }
-
-    public function sendShippingDetails($same_as_billing, $name = null, $email = null, $phone = null, $address = null, $city = null, $state = null, $country = null, $zip = null, $ip = null)
+    
+    public function sendShippingDetails($name, $email, $phone, $address, $city, $state, $country, $zip, $ip)
     {
-        $this->paytabs_core->set05ShippingDetails($same_as_billing, $name, $email, $phone, $address, $city, $state, $country, $zip, $ip);
+        $this->paytabs_core->set05ShippingDetails(false, $name, $email, $phone, $address, $city, $state, $country, $zip, $ip);
+        return $this;
+    }
+
+    public function shipping_same_billing()
+    {
+        $this->paytabs_core->set05ShippingDetails(true);
         return $this;
     }
 
@@ -100,7 +106,7 @@ class paypage
 
     public function create_pay_page()
     {
-        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.3.3');
+        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.4.0');
         $pp_params = $this->paytabs_core->pt_build();
         $response = $this->paytabs_api->create_pay_page($pp_params);
 
