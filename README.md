@@ -180,6 +180,13 @@ Now, you need to configure the plugin with the class\method that will grab the p
             $cartId= $requestData->getCartId();
             $status= $requestData->getStatus();
             //your logic .. updating cart in DB, notifying the customer ...etc
+
+            //Hold On Reject support
+            // if $status = "H" this is mean the transaction is hold on reject.
+            // you can't make capture for it from your system.
+            // you must make the capture from paytabs dashboard side.
+            // make sure to add your ipn value to paytabs dashboard from here:
+             "{paytabs portal}/merchant/developers/ipnconfig".
         }
 you can also get transaction reference number. To get the list of available properties check: _Paytabscom\Laravel__paytabs\IpnRequest_ class.
 
