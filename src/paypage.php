@@ -32,9 +32,9 @@ class paypage
         return $this;
     }
 
-    public function sendTransaction($transaction)
+    public function sendTransaction($transaction,$tran_class)
     {
-        $this->paytabs_core->set02Transaction($transaction);
+        $this->paytabs_core->set02Transaction($transaction,$tran_class);
         return $this;
     }
 
