@@ -15,7 +15,7 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 This Package integrates PayTabs online payments into
-the Laravel Framework starts from version 5.8 - 8.x.
+the Laravel Framework starts from version 5.8 - 10.x.
 
 REQUIREMENTS
 ------------
