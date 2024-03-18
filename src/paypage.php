@@ -108,7 +108,6 @@ class paypage
     public function create_pay_page()
     {
         $this->paytabs_core->set99PluginInfo('Laravel',8,'1.4.0');
-        //dd('test');
         $basic_params = $this->paytabs_core->pt_build();
         $token_params = $this->paytabs_core_token->pt_build();
         $pp_params = array_merge($basic_params,$token_params);
