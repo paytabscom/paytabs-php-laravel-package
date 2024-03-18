@@ -11,6 +11,7 @@ class paypage
 
     public  $paytabsinit,
         $paytabs_core,
+        $paytabs_core_token,
         $paytabs_api,
         $follow_transaction,
         $laravel_version,
@@ -23,7 +24,7 @@ class paypage
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
-        $this->package_version = '1.4.0';
+        $this->package_version = '1.5.0';
     }
 
     public function sendPaymentCode($code)
@@ -92,9 +93,9 @@ class paypage
         return $this;
     }
 
-    public function sendToken($token, $tran_ref)
+    public function sendToken($tran_ref,$token)
     {
-        $this->paytabs_core_token->set20Token($token, $tran_ref);
+        $this->paytabs_core_token->set20Token($tran_ref,$token);
         return $this; 
     }
 
@@ -106,8 +107,10 @@ class paypage
 
     public function create_pay_page()
     {
-        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.4.0');
-        $pp_params = $this->paytabs_core->pt_build();
+        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.5.0');
+        $basic_params = $this->paytabs_core->pt_build();
+        $token_params = $this->paytabs_core_token->pt_build();
+        $pp_params = array_merge($basic_params,$token_params);
         $response = $this->paytabs_api->create_pay_page($pp_params);
 
         if ($response->success) {

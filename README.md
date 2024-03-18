@@ -60,7 +60,7 @@ Usage
         use Paytabscom\Laravel_paytabs\Facades\paypage;
 
         $pay= paypage::sendPaymentCode('all')
-               ->sendTransaction('sale')
+               ->sendTransaction('sale','ecom')
                 ->sendCart(10,1000,'test')
                ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
                ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
@@ -94,7 +94,7 @@ Usage
 * if you want to make a payment via token you can use
 
         ->sendTransaction('transaction_type','recurring')
-        ->sendToken('token returned from the first payment page created with Tokenization option','transRef returned to you in the same first payment page')
+        ->sendToken('transRef returned to you in the same first payment page','token returned from the first payment page created with Tokenization option')
 
 * if you want to make a payment with user defined you can use
 
