@@ -24,7 +24,7 @@ class paypage
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
-        $this->package_version = '1.5.0';
+        $this->package_version = '1.6.0';
     }
 
     public function sendPaymentCode($code)
@@ -105,26 +105,54 @@ class paypage
         return $this; 
     }
 
-    public function create_pay_page()
+   public function create_pay_page()
     {
-        $this->paytabs_core->set99PluginInfo('Laravel',8,'1.5.0');
+        $this->paytabs_core->set99PluginInfo('Laravel',9,'1.6.0');
         $basic_params = $this->paytabs_core->pt_build();
         $token_params = $this->paytabs_core_token->pt_build();
         $pp_params = array_merge($basic_params,$token_params);
         $response = $this->paytabs_api->create_pay_page($pp_params);
 
-        if ($response->success) {
-            $redirect_url = $response->redirect_url;
-            if (isset($pp_params['framed']) &&  $pp_params['framed'] == true)
+       
+        if(isset($response->is_redirect) && $response->is_redirect)
+        {
+            if ($response->success) 
             {
-                return $redirect_url;
+                $redirect_url = $response->redirect_url;
+                if (isset($pp_params['framed']) &&  $pp_params['framed'] == true)
+                {
+                    return $redirect_url;
+                }
+                return Redirect::to($redirect_url);
             }
-            return Redirect::to($redirect_url);
+            else
+            {
+                Log::channel('PayTabs')->info(json_encode($response));
+                print_r(json_encode($response));
+            }
         }
-        else {
-            Log::channel('PayTabs')->info(json_encode($response));
-            print_r(json_encode($response));
+
+        if(isset($response->is_completed) && $response->is_completed)
+        {
+            if ($response->success) 
+            {
+                $data = [
+                    'tran_ref' => $response->tran_ref,
+                    'previous_tran_ref' => $response->previous_tran_ref
+                ];
+
+                return response()->json(['data' => $data], 200);
+            }
+            else
+            {
+                Log::channel('PayTabs')->info(json_encode($response));
+                print_r(json_encode($response));
+            }
         }
+       
+        Log::channel('PayTabs')->info(json_encode($response));
+        print_r(json_encode($response));
+      
     }
 
 
