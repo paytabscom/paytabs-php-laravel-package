@@ -101,7 +101,7 @@ class paypage
 
     public function sendUserDefined(array $user_defined = [])
     {
-        $this->paytabs_core->set100userDefined($user_defined);
+        $this->paytabs_core->set50UserDefined($user_defined);
         return $this; 
     }
 
