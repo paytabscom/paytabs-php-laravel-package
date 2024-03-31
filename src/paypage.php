@@ -158,7 +158,7 @@ class paypage
 
     public function refund($tran_ref,$order_id,$amount,$refund_reason)
     {
-         $this->follow_transaction->set02Transaction(PaytabsEnum::TRAN_TYPE_REFUND)
+        $this->follow_transaction->set02Transaction(PaytabsEnum::TRAN_TYPE_REFUND)
             ->set03Cart($order_id, config('paytabs.currency'), $amount, $refund_reason)
             ->set30TransactionInfo($tran_ref)
             ->set99PluginInfo('Laravel', $this->laravel_version, $this->package_version);
@@ -217,11 +217,24 @@ class paypage
             } else {
                 $status = 'captured';
             }
-            return response()->json(['status' => $status], 200);
-        } else if ($pending_success) {
+
+             $data = [
+                'tran_ref' => $result->tran_ref,
+                'previous_tran_ref' => $result->previous_tran_ref,
+                'captured_amount' => $result->tran_total,
+                'status' => $status
+            ];
+            return response()->json(['data' => $data], 200);
+
+         } else if ($pending_success) {
             Log::channel('PayTabs')->info(json_encode($result));
-            print_r('some thing went wrong with integration' . $message);
+            print_r('something went wrong with integration <br/> paytabs message is: ' . $message);
         }
+        else
+        {
+            Log::channel('PayTabs')->info(json_encode($result));
+            print_r('something went wrong with integration <br/> paytabs message is: '. $message);
+        } 
     }
 
     public function void($tran_ref,$order_id,$amount,$void_description)
@@ -245,11 +258,22 @@ class paypage
             } else {
                 $status = 'voided';
             }
-            return response()->json(['status' => $status], 200);
+            $data = [
+                'tran_ref' => $result->tran_ref,
+                'previous_tran_ref' => $result->previous_tran_ref,
+                'voided_amount' => $result->tran_total,
+                'status' => $status
+            ];
+            return response()->json(['data' => $data], 200);
         } else if ($pending_success) {
             Log::channel('PayTabs')->info(json_encode($result));
-            print_r('some thing went wrong with integration' . $message);
+            print_r('something went wrong with integration <br/> paytabs message is: ' . $message);
         }
+        else
+        {
+            Log::channel('PayTabs')->info(json_encode($result));
+            print_r('something went wrong with integration <br/> paytabs message is: '. $message);
+        } 
     }
 
     public function queryTransaction($tran_ref)
