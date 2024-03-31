@@ -7,6 +7,7 @@ This Package provides integration with the PayTabs payment gateway.
 CONTENTS OF THIS FILE
 ---------------------
 * Introduction
+* what's new
 * Requirements
 * Installation
 * Configuration
@@ -16,6 +17,11 @@ INTRODUCTION
 ------------
 This Package integrates PayTabs online payments into
 the Laravel Framework starts from version 5.8 - 10.x.
+
+WHAT'S NEW
+------------
+- change parameters ordering in the recuring function.
+- change response from (Refund - Capture - Void) functions to provide more info.
 
 REQUIREMENTS
 ------------
@@ -111,7 +117,7 @@ Usage
 * Auth
 
         pay= Paypage::sendPaymentCode('all')
-               ->sendTransaction('Auth')
+               ->sendTransaction('Auth','ecom')
                 ->sendCart(10,1000,'test')
                ->sendCustomerDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')
                ->sendShippingDetails('Walaa Elsaeed', 'w.elsaeed@paytabs.com', '0101111111', 'test', 'Nasr City', 'Cairo', 'EG', '1234','100.279.20.10')

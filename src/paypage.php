@@ -24,7 +24,7 @@ class paypage
         $this->paytabs_api = PaytabsApi::getInstance(config('paytabs.region'), config('paytabs.profile_id'), config('paytabs.server_key'));
         $this->follow_transaction = new PaytabsFollowupHolder();
         $this->laravel_version = app()::VERSION;
-        $this->package_version = '1.6.0';
+        $this->package_version = '1.7.0';
     }
 
     public function sendPaymentCode($code)
@@ -101,13 +101,13 @@ class paypage
 
     public function sendUserDefined(array $user_defined = [])
     {
-        $this->paytabs_core->set100userDefined($user_defined);
+        $this->paytabs_core->set50UserDefined($user_defined);
         return $this; 
     }
 
    public function create_pay_page()
     {
-        $this->paytabs_core->set99PluginInfo('Laravel',9,'1.6.0');
+        $this->paytabs_core->set99PluginInfo('Laravel',9,'1.7.0');
         $basic_params = $this->paytabs_core->pt_build();
         $token_params = $this->paytabs_core_token->pt_build();
         $pp_params = array_merge($basic_params,$token_params);
@@ -177,11 +177,22 @@ class paypage
             } else {
                 $status = 'refunded';
             }
-            return response()->json(['status' => $status], 200);
+            $data = [
+                'tran_ref' => $result->tran_ref,
+                'previous_tran_ref' => $result->previous_tran_ref,
+                'refunded_amount' => $result->tran_total,
+                'status' => $status
+            ];
+            return response()->json(['data' => $data], 200);
         } else if ($pending_success) {
             Log::channel('PayTabs')->info(json_encode($result));
-            print_r('some thing went wrong with integration' . $message);
+            print_r('something went wrong with integration <br/> paytabs message is: ' . $message);
         }
+        else
+        {
+            Log::channel('PayTabs')->info(json_encode($result));
+            print_r('something went wrong with integration <br/> paytabs message is: '. $message);
+        } 
 
     }
 
@@ -206,11 +217,24 @@ class paypage
             } else {
                 $status = 'captured';
             }
-            return response()->json(['status' => $status], 200);
-        } else if ($pending_success) {
+
+             $data = [
+                'tran_ref' => $result->tran_ref,
+                'previous_tran_ref' => $result->previous_tran_ref,
+                'captured_amount' => $result->tran_total,
+                'status' => $status
+            ];
+            return response()->json(['data' => $data], 200);
+
+         } else if ($pending_success) {
             Log::channel('PayTabs')->info(json_encode($result));
-            print_r('some thing went wrong with integration' . $message);
+            print_r('something went wrong with integration <br/> paytabs message is: ' . $message);
         }
+        else
+        {
+            Log::channel('PayTabs')->info(json_encode($result));
+            print_r('something went wrong with integration <br/> paytabs message is: '. $message);
+        } 
     }
 
     public function void($tran_ref,$order_id,$amount,$void_description)
@@ -234,11 +258,22 @@ class paypage
             } else {
                 $status = 'voided';
             }
-            return response()->json(['status' => $status], 200);
+            $data = [
+                'tran_ref' => $result->tran_ref,
+                'previous_tran_ref' => $result->previous_tran_ref,
+                'voided_amount' => $result->tran_total,
+                'status' => $status
+            ];
+            return response()->json(['data' => $data], 200);
         } else if ($pending_success) {
             Log::channel('PayTabs')->info(json_encode($result));
-            print_r('some thing went wrong with integration' . $message);
+            print_r('something went wrong with integration <br/> paytabs message is: ' . $message);
         }
+        else
+        {
+            Log::channel('PayTabs')->info(json_encode($result));
+            print_r('something went wrong with integration <br/> paytabs message is: '. $message);
+        } 
     }
 
     public function queryTransaction($tran_ref)
