@@ -20,7 +20,7 @@ the Laravel Framework starts from version 5.8 - 10.x.
 
 WHAT'S NEW
 ------------
-- change parameters ordering in the recuring function.
+- change parameters ordering in the recurring function.
 - change response from (Refund - Capture - Void) functions to provide more info.
 
 REQUIREMENTS
