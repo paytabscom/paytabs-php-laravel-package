@@ -18,11 +18,6 @@ INTRODUCTION
 This Package integrates PayTabs online payments into
 the Laravel Framework starts from version 5.8 - 10.x.
 
-WHAT'S NEW
-------------
-- change parameters ordering in the recuring function.
-- change response from (Refund - Capture - Void) functions to provide more info.
-
 REQUIREMENTS
 ------------
 This Package requires no external dependencies.
