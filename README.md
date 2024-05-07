@@ -86,7 +86,8 @@ Usage
 
 * if you want to pass the payment methods you can use
 
-        ::sendPaymentCode("['creditcard','fawry']")
+        ::sendPaymentCode("creditcard, valu, forsa")
+        - separate by space between payment methods.
 
 * if you want to pass the Tokenization option you can use
 
