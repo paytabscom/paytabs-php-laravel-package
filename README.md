@@ -29,7 +29,8 @@ INSTALLATION
 CONFIGURATION
 -------------
 * composer dump-autoload
-* For Laravel 11 go to _bootstrap/providers.php_ and add 
+* For Laravel 11 go to _bootstrap/providers.php_ and add
+  
         Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
 
 * For Laravel 10 and below go to _config/app.php_ and in the providers array add
