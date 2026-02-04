@@ -1,6 +1,6 @@
 {
     "name": "paytabscom/laravel_paytabs",
-    "version": "1.9.0",
+    "version": "1.10.0",
     "type": "composer-package",
     "description": "Official laravel package to implement PayTabs integration with laravel apps",
     "authors": [
