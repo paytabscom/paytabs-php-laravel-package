@@ -1471,6 +1471,14 @@ class PaytabsApi
             'title' => 'Kuwait',
             'endpoint' => 'https://secure-kuwait.paytabs.com/'
         ],
+        'MAR' => [
+            'title' => 'Morocco',
+            'endpoint' => 'https://secure-morocco.paytabs.com/'
+        ],
+        'QAT' => [
+            'title' => 'Qatar',
+            'endpoint' => 'https://secure-doha.paytabs.com/'
+        ],
         'GLOBAL' => [
             'title' => 'Global',
             'endpoint' => 'https://secure-global.paytabs.com/'
