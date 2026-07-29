@@ -1,4 +1,10 @@
-Laravel PayTabs PT2
+> **⚠️ This repository is no longer maintained.**  
+> Please visit the new repository here: [PayTabs Laravel SDK](https://github.com/paytabscom/laravel-sdk)
+
+---
+
+# Laravel PayTabs PT2 (no longer maintained)
+Moved to: https://github.com/paytabscom/laravel-sdk
 
 Description
 -----------
