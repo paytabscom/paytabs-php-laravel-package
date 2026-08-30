@@ -4,7 +4,7 @@
 namespace Paytabscom\Laravel_paytabs;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
-
+use Paytabscom\Laravel_paytabs\PaytabsEnum;
 
 class paypage
 {
@@ -33,7 +33,7 @@ class paypage
         return $this;
     }
 
-    public function sendTransaction($transaction,$tran_class)
+    public function sendTransaction($transaction,$tran_class = PaytabsEnum::TRAN_CLASS_ECOM)
     {
         $this->paytabs_core->set02Transaction($transaction,$tran_class);
         return $this;
